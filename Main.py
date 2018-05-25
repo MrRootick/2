@@ -37,7 +37,7 @@ def new_post_key():
     except:
         print('Какая то ошибка')
 
-new_post_key()
+
 
 @server.route('/' + TOKEN, methods=['POST'])
 def getMessage():
@@ -52,5 +52,6 @@ def webhook():
     return "!", 200
 
 if __name__ == '__main__':
+    new_post_key()
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
 
