@@ -26,16 +26,19 @@ def new_post_key():
             c.close()
             conn.close()
             time.sleep(60*10)
+            new_post_key()
+
 
         else:
             time.sleep(10)
             c.close()
             conn.close()
             print("Пусто")
+            new_post_key()
+
     except:
         print('Какая то ошибка')
-
-
+        new_post_key()
 
 
 @bot.message_handler(commands=['start'])  # Обработка команды start
