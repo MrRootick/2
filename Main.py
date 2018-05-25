@@ -25,7 +25,7 @@ def new_post_key():
             conn.commit()
             c.close()
             conn.close()
-            time.sleep(10)
+            time.sleep(60*10)
             new_post_key()
         else:
             time.sleep(10)
