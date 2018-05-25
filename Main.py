@@ -23,15 +23,12 @@ def new_post_key():
         key = str(value[0])
         if key != None:
             bot.send_message(CHANNEL_NAME, key)
-            conn.commit()
             c.close()
             conn.close()
             time.sleep(60*10)
-            new_post_key()
+
         else:
             time.sleep(10)
-            new_post_key()
-            conn.commit()
             c.close()
             conn.close()
             print("Пусто")
@@ -44,7 +41,6 @@ def new_post_key():
 @bot.message_handler(commands=['start'])  # Обработка команды start
 def handle_text(message):
     answer = "Привет"
-    new_post_key()
     bot.send_message(message.chat.id, answer )
 
 
@@ -64,4 +60,5 @@ def webhook():
 
 
 if __name__ == "__main__":
+    new_post_key()
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
