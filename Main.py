@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
-
+import os
 import time
 import sqlite3
 import telebot
+from flask import Flask, request
 
-
-BOT_TOKEN = '486750815:AAFQ2XOflRepZFeLJuac-0Ii3vM61ToDg6o'
+TOKEN = '486750815:AAFQ2XOflRepZFeLJuac-0Ii3vM61ToDg6o'
 CHANNEL_NAME = '-1001275366258'
 
-bot = telebot.TeleBot(BOT_TOKEN)
+server = Flask(__name__)
+
+bot = telebot.TeleBot(TOKEN)
 
 
 def new_post_key():
@@ -39,7 +41,27 @@ def new_post_key():
 
 
 
-
-if __name__ == '__main__':
+@bot.message_handler(commands=['start'])  # Обработка команды start
+def handle_text(message):
     new_post_key()
-    bot.polling(none_stop=True, timeout=1200)
+    answer = "Привет"
+    bot.send_message(message.chat.id, answer )
+
+
+
+
+@server.route('/' + TOKEN, methods=['POST'])
+def getMessage():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "!", 200
+
+
+@server.route("/")
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url='https://botch.herokuapp.com' + TOKEN)
+    return "!", 200
+
+
+if __name__ == "__main__":
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
