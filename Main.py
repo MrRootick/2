@@ -3,6 +3,7 @@ import os
 import time
 import sqlite3
 import telebot
+import random
 from flask import Flask, request
 
 TOKEN = '486750815:AAFQ2XOflRepZFeLJuac-0Ii3vM61ToDg6o'
@@ -16,12 +17,12 @@ def new_post_key():
     try:
         conn = sqlite3.connect('database.db')
         c = conn.cursor()
-        c.execute("SELECT asd FROM qweqwe")
+        q=random.randint(1,47000)
+        c.execute("SELECT asd FROM qqq WHERE id='{}'".format(q))
         value = c.fetchone()
         key = str(value[0])
         if key != None:
             bot.send_message(CHANNEL_NAME, key)
-            c.execute("DELETE FROM qweqwe WHERE asd = '{0}'".format(key))
             conn.commit()
             c.close()
             conn.close()
