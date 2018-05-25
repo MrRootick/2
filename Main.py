@@ -43,8 +43,8 @@ def new_post_key():
 
 @bot.message_handler(commands=['start'])  # Обработка команды start
 def handle_text(message):
-    new_post_key()
     answer = "Привет"
+    new_post_key()
     bot.send_message(message.chat.id, answer )
 
 
