@@ -46,7 +46,11 @@ def handle_text(message):
     answer = "Привет"
     bot.send_message(message.chat.id, answer )
 
-
+@bot.message_handler(commands=['startkey'])  # Обработка команды start
+def handle_text(message):
+    answer = "Ключи раздаются"
+    bot.send_message(message.chat.id, answer )
+    new_post_key()
 
 
 @server.route('/' + TOKEN, methods=['POST'])
@@ -63,5 +67,4 @@ def webhook():
 
 
 if __name__ == "__main__":
-    new_post_key()
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
