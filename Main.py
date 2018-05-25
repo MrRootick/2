@@ -8,9 +8,8 @@ from flask import Flask, request
 TOKEN = '486750815:AAFQ2XOflRepZFeLJuac-0Ii3vM61ToDg6o'
 CHANNEL_NAME = '-1001275366258'
 
-server = Flask(__name__)
-
 bot = telebot.TeleBot(TOKEN)
+server = Flask(__name__)
 
 
 def new_post_key():
@@ -59,7 +58,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://botch.herokuapp.com' + TOKEN)
+    bot.set_webhook(url='https://botch.herokuapp.com/' + TOKEN)
     return "!", 200
 
 
