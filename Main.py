@@ -42,3 +42,4 @@ def new_post_key():
 
 if __name__ == '__main__':
     new_post_key()
+    bot.polling(none_stop=True, timeout=1200)
